@@ -1,0 +1,115 @@
+{
+	"identifier": "Level_0",
+	"uniqueIdentifer": "83231f70-e920-11ef-b28e-258c92f5bb7f",
+	"x": 0,
+	"y": 288,
+	"width": 1888,
+	"height": 1360,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"Ground.png",
+		"FlowersRed.png",
+		"FlowersWhite.png",
+		"RoadGrid.png",
+		"Water3.png",
+		"Rocks.png",
+		"Rocks2.png",
+		"Prop2.png",
+		"PropsBehind.png",
+		"Props.png",
+		"Miscgreenary.png",
+		"Greenery.png",
+		"Greenery2.png",
+		"Greenery3.png",
+		"Greenery4.png",
+		"Prop3.png",
+		"BuildingsFront.png",
+		"Buildings.png",
+		"Building2Front.png",
+		"Building2.png"
+	],
+	"entities": {
+		"ElGiganten": [
+			{
+				"id": "ElGiganten",
+				"iid": "8b577ae0-e920-11ef-b55e-a5eb3db2e3f6",
+				"layer": "Work",
+				"x": 880,
+				"y": 944,
+				"width": 16,
+				"height": 16,
+				"color": 14120515,
+				"customFields": {
+					"workPeriod": "2011",
+					"workDescription": "Säljare, El Giganten AB\n\nNär jag arbetade som säljare på Elgiganten var mitt huvudsakliga ansvar att driva försäljning och uppnå dagsmålen för både vinst och omsättning. Utöver att aktivt hjälpa kunder såg jag till att hyllorna var välfyllda och prydliga samt att butikens exponering var inbjudande och attraktiv."
+				}
+			}
+		],
+		"Ichaicha": [
+			{
+				"id": "Ichaicha",
+				"iid": "9a2d6f10-e920-11ef-b55e-2701e29671dc",
+				"layer": "Work",
+				"x": 1056,
+				"y": 720,
+				"width": 16,
+				"height": 16,
+				"color": 12470831,
+				"customFields": {
+					"workPeriod": "2012 - 2015",
+					"workDescription": "\n"
+				}
+			}
+		],
+		"Skovdekommun": [
+			{
+				"id": "Skovdekommun",
+				"iid": "152cd820-e920-11ef-b55e-f5b98d59aba4",
+				"layer": "Work",
+				"x": 1392,
+				"y": 688,
+				"width": 16,
+				"height": 16,
+				"color": 12470831,
+				"customFields": {
+					"workPeriod": "2020",
+					"workDescription": "Kock, Skövde Kommun\n\nJag har arbetat som kock inom Skövde kommun, där jag lagat mat till skolor, förskolor och äldreboenden – med varierande arbetsplatser från dag till dag. All mat lagas från grunden, och jag har även bakat eget bröd dagligen. Utöver de vanliga kökssysslorna, såsom att packa upp varor och tillaga måltider, har jag haft stort fokus på att säkerställa näringsrika och välbalanserade måltider enligt kommunens riktlinjer."
+				}
+			}
+		],
+		"Majoren": [
+			{
+				"id": "Majoren",
+				"iid": "284f86a0-e920-11ef-b55e-1f595b4c60e1",
+				"layer": "Work",
+				"x": 384,
+				"y": 816,
+				"width": 16,
+				"height": 16,
+				"color": 12470831,
+				"customFields": {
+					"workPeriod": "2018 - 2020",
+					"workDescription": "Food & Beverage Manager, Clarion Collection Hotel Majoren, Skövde\n\nJobbar för tillfället som Food and Beverage Manager på Hotel Majoren i Skövde där\njag ansvarar för driften i köket gällande beställning av varor, lagar mat, packa upp,\ninventera, meny planera och diverse. Men i det stora hela så är det mitt jobb att se\ntill så att alla ärenden gällande mat, dryck och kök flyter på utan problem."
+				}
+			}
+		],
+		"Scandic": [
+			{
+				"id": "Scandic",
+				"iid": "2ad10160-e920-11ef-b55e-610a97912370",
+				"layer": "Work",
+				"x": 1168,
+				"y": 496,
+				"width": 16,
+				"height": 16,
+				"color": 12470831,
+				"customFields": {
+					"workPeriod": "2016 - 2018",
+					"workDescription": "Kock, Hotell Scandic Billingen Skövde\n\nJag arbetade som kock på Hotell Scandic Billingen, där vi serverade lunch på dagarna och à la carte på kvällarna. Mina arbetsuppgifter bestod av att förbereda råvaror, tillaga maträtter samt hålla arbetsytor och köket rent och organiserat.\nUtöver det dagliga arbetet ansvarade vi även för olika evenemang, såsom bröllop och större tillställningar, exempelvis Försvarets vårbal och Gasellbrevet."
+				}
+			}
+		]
+	}
+}
