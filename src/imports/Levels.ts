@@ -16,7 +16,7 @@ import rocks2 from "@/assets/map/Level_0/Rocks2.png"
 import props from "../assets/map/Level_0/Props.png"
 import propsbehind from "../assets/map/Level_0/PropsBehind.png"
 import gate from "../assets/map/Level_0/Prop2.png"
-import well from "../assets/map/Level_0/Props.png"
+import well from "../assets/map/Level_0/Prop3.png"
 //Buildings
 import buildings from "../assets/map/Level_0/Buildings.png"
 import buildingsFront from "../assets/map/Level_0/BuildingsFront.png"

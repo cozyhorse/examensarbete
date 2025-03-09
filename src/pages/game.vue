@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-    <div class="game" ref="gameContainer"></div>
-    <!-- <v-btn @click="goBack">
-      Back
-    </v-btn> -->
+    <div class="game-wrapper">
+      <v-card class="custom-card" elevation="5" width="1300" height="700">
+        <div class="game" ref="gameContainer"></div>
+      </v-card>
+        <v-btn class="custom-btn" @click="goBack">Back</v-btn>
+      </div>
   </div>
 </template>
 
@@ -44,7 +46,7 @@ const gameContainer = ref<HTMLElement | null>(null)
 const keys: Record<string, boolean> = {};
 let currentSprite: PIXI.AnimatedSprite;
 let newSprite: PIXI.AnimatedSprite;
-const speed: number = 1.5;
+const speed: number = 3.5;
 const collisionMap = ref<number[][]>([]);
 const tileSize = 16;
 
@@ -61,8 +63,9 @@ const initGame = async () => {
 
   const app = new PIXI.Application();
   await app.init({
-    width: data.width,
-    height: data.height,
+    //width: data.width / 2,
+    //height: data.height / 2,
+    resizeTo: window,
     backgroundColor: 'grey'
   })
   gameContainer.value.appendChild(app.canvas)
@@ -91,6 +94,7 @@ const initGame = async () => {
   const wellTexture = await layer(well)
   const flowerRedTexture = await layer(flowerRed)
   const flowerWhiteTexture = await layer(flowerWhite)
+
   world.addChild(groundTexture)
   world.addChild(roadTexture)
   world.addChild(flowerWhiteTexture)
@@ -99,17 +103,18 @@ const initGame = async () => {
   world.addChild(rocks1Texture)
   world.addChild(rocks2Texture)
   world.addChild(greeneryFirst)
+  greenerySecond.zIndex = 8
   world.addChild(greenerySecond)
   world.addChild(greeneryThird)
   world.addChild(greeneryFourth)
-  greeneryMiscTexture.zIndex = 9999
+  greeneryMiscTexture.zIndex = 6
   world.addChild(greeneryMiscTexture)
   world.addChild(buildings1Front)
   world.addChild(shopBack)
   world.addChild(shopFront)
   propsTexture.zIndex = 9
   world.addChild(propsTexture)
-  propsBehindTexture.zIndex = 9
+  propsBehindTexture.zIndex = 6
   world.addChild(propsBehindTexture)
   gateTexture.zIndex = 8
   world.addChild(gateTexture)
@@ -129,12 +134,12 @@ const initGame = async () => {
   // aWalkDown.play()
   //app.stage.addChild(currentSprite)
   currentSprite = walkLeft
-  currentSprite.anchor.set(0.5);
-  currentSprite.x = 859;
+  currentSprite.anchor.set(1);
+  currentSprite.x = 1550;
   currentSprite.y = 1200;
   currentSprite.zIndex = 7
-
   world.addChild(currentSprite)
+  console.log("sprite",currentSprite.width);
 
   const switchSprite = (newSprite: PIXI.AnimatedSprite) => {
     if (newSprite !== currentSprite) {
@@ -155,8 +160,8 @@ const initGame = async () => {
   entity.anchor.set(0.5, 0.5)
   entity.width = 10
   entity.height = 20
-  entity.x = 488
-  entity.y = 672
+  entity.x = 856
+  entity.y = 1000
   entity.tint = 8189007
 
   world.addChild(entity)
@@ -179,19 +184,21 @@ const initGame = async () => {
 
   app.ticker.add(() => {
     newSprite = currentSprite;
+    newSprite.zIndex = 7
     let nextX = currentSprite.x;
     let nextY = currentSprite.y;
 
-    const playerCollision = currentSprite.getBounds()
-    const entity1Collision = entity.getBounds()
-    if (
-      playerCollision.x < entity1Collision.x + entity1Collision.width &&
-      playerCollision.x + playerCollision.width > entity1Collision.x &&
-      playerCollision.y < entity1Collision.y + entity1Collision.height &&
-      playerCollision.y + playerCollision.height > entity1Collision.y
-    ) {
-      console.log("Hit Entity 1");
-    }
+
+    // const playerCollision = currentSprite.getBounds()
+    // const entity1Collision = entity.getBounds()
+    // if (
+    //   playerCollision.x < entity1Collision.x + entity1Collision.width &&
+    //   playerCollision.x + playerCollision.width > entity1Collision.x &&
+    //   playerCollision.y < entity1Collision.y + entity1Collision.height &&
+    //   playerCollision.y + playerCollision.height > entity1Collision.y
+    // ) {
+    //   console.log("Hit Entity 1");
+    // }
 
 
     if (keys['ArrowUp'] && canMove(nextX, nextY - speed)) {
@@ -225,8 +232,8 @@ const initGame = async () => {
 
     switchSprite(newSprite);
 
-    world.x = -currentSprite.x + app.screen.width * 0.34;
-    world.y = -currentSprite.y + app.screen.height * 0.34;
+    world.x = -currentSprite.x + app.screen.width * 0.4;
+    world.y = -currentSprite.y + app.screen.height * 0.3;
   })
 }
 
@@ -248,26 +255,68 @@ const loadCollisionData = async () => {
 }
 
 const canMove = (x: number, y: number) => {
-  const tileX = Math.floor(x / tileSize);
-  const tileY = Math.floor(y / tileSize);
+  const playerWidth = currentSprite.width;   // Get player width
+  const playerHeight = currentSprite.height; // Get player height
 
-  if (tileY < 0 || tileY >= collisionMap.value.length ||
-    tileX < 0 || tileX >= collisionMap.value[0].length
-  ) {
-    return false
-  }
-  return collisionMap.value[tileY][tileX] === 0;
+  // Check all four corners
+  const corners = [
+    { x: x - playerWidth / 2, y: y - playerHeight / 2 }, // Top-left
+    { x: x + playerWidth / 2, y: y - playerHeight / 2 }, // Top-right
+    { x: x - playerWidth / 2, y: y + playerHeight / 2 }, // Bottom-left
+    { x: x + playerWidth / 2, y: y + playerHeight / 2 }  // Bottom-right
+  ];
+
+  return corners.every(corner => {
+    const tileX = Math.floor(corner.x / tileSize);
+    const tileY = Math.floor(corner.y / tileSize);
+
+    if (
+      tileY < 0 || tileY >= collisionMap.value.length ||
+      tileX < 0 || tileX >= collisionMap.value[0].length
+    ) {
+      return false; // Out of bounds
+    }
+
+    return collisionMap.value[tileY][tileX] === 0;
+  });
+};
+
+const goBack = () => {
+  router.back();
 }
-
-// const goBack = () => {
-//   router.back();
-// }
 
 
 </script>
 
 <style lang="scss" scoped>
+
+// .container{
+//   position: absolute;
+// }
+
+.custom-btn{
+  position: relative;
+  top: -50px;
+  left: 150px;
+}
+
+
+
+.game-wrapper {
+  //width: 1600px;  // Set desired width
+  height: 710px; // Set desired height
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-card{
+  margin: auto;
+  overflow: hidden;
+}
+
 .game {
-  transform: scale(1.1);
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
 }
 </style>

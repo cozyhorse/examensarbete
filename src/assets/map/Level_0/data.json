@@ -1,10 +1,10 @@
 {
 	"identifier": "Level_0",
 	"uniqueIdentifer": "83231f70-e920-11ef-b28e-258c92f5bb7f",
-	"x": 0,
+	"x": -688,
 	"y": 288,
-	"width": 1888,
-	"height": 1360,
+	"width": 3616,
+	"height": 1792,
 	"bgColor": "#696A79",
 	"neighbourLevels": [],
 	"customFields" : {},
@@ -36,7 +36,7 @@
 				"id": "ElGiganten",
 				"iid": "8b577ae0-e920-11ef-b55e-a5eb3db2e3f6",
 				"layer": "Work",
-				"x": 880,
+				"x": 1568,
 				"y": 944,
 				"width": 16,
 				"height": 16,
@@ -52,14 +52,16 @@
 				"id": "Ichaicha",
 				"iid": "9a2d6f10-e920-11ef-b55e-2701e29671dc",
 				"layer": "Work",
-				"x": 1056,
+				"x": 1744,
 				"y": 720,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
 				"customFields": {
 					"workPeriod": "2012 - 2015",
-					"workDescription": "\n"
+					"workTitle":"Diskare till Köksansvarig, Restaurang Icha Icha",
+					"workDescription": "Jag arbetade som köksansvarig på en lunchrestaurang i Stockholm, där vi dagligen tog emot 400-500 gäster under lunchtid. I denna roll var jag ansvarig för den dagliga driften av köket. Det innebar att jag såg till att allt var förberett inför dagens arbete, inklusive att kontrollera lager, hantera beställningar och säkerställa att köksutrustningen var i gott skick. Jag hade även ansvar för att hålla köket rent och ordnat, och att alla hygienkrav efterlevdes noggrant.\n\nFör att säkerställa en effektiv arbetsdag fördelade jag arbetsuppgifter bland kökspersonalen och såg till att arbetsflödet fungerade smidigt under hela lunchtidens hektiska period."
+					
 				}
 			}
 		],
@@ -68,14 +70,15 @@
 				"id": "Skovdekommun",
 				"iid": "152cd820-e920-11ef-b55e-f5b98d59aba4",
 				"layer": "Work",
-				"x": 1392,
+				"x": 2080,
 				"y": 688,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
 				"customFields": {
 					"workPeriod": "2020",
-					"workDescription": "Kock, Skövde Kommun\n\nJag har arbetat som kock inom Skövde kommun, där jag lagat mat till skolor, förskolor och äldreboenden – med varierande arbetsplatser från dag till dag. All mat lagas från grunden, och jag har även bakat eget bröd dagligen. Utöver de vanliga kökssysslorna, såsom att packa upp varor och tillaga måltider, har jag haft stort fokus på att säkerställa näringsrika och välbalanserade måltider enligt kommunens riktlinjer."
+					"workTitle":"Kock, Skövde Kommun",
+					"workDescription": "Jag har arbetat som kock inom Skövde kommun, där jag lagat mat till skolor, förskolor och äldreboenden – med varierande arbetsplatser från dag till dag. All mat lagas från grunden, och jag har även bakat eget bröd dagligen. Utöver de vanliga kökssysslorna, såsom att packa upp varor och tillaga måltider, har jag haft stort fokus på att säkerställa näringsrika och välbalanserade måltider enligt kommunens riktlinjer."
 				}
 			}
 		],
@@ -84,14 +87,15 @@
 				"id": "Majoren",
 				"iid": "284f86a0-e920-11ef-b55e-1f595b4c60e1",
 				"layer": "Work",
-				"x": 384,
+				"x": 1072,
 				"y": 816,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
 				"customFields": {
 					"workPeriod": "2018 - 2020",
-					"workDescription": "Food & Beverage Manager, Clarion Collection Hotel Majoren, Skövde\n\nJobbar för tillfället som Food and Beverage Manager på Hotel Majoren i Skövde där\njag ansvarar för driften i köket gällande beställning av varor, lagar mat, packa upp,\ninventera, meny planera och diverse. Men i det stora hela så är det mitt jobb att se\ntill så att alla ärenden gällande mat, dryck och kök flyter på utan problem."
+					"workTitle":"Food & Beverage Manager, Clarion Collection Hotel Majoren",
+					"workDescription": "Jobbar för tillfället som Food and Beverage Manager på Hotel Majoren i Skövde där\njag ansvarar för driften i köket gällande beställning av varor, lagar mat, packa upp,\ninventera, meny planera och diverse. Men i det stora hela så är det mitt jobb att se\ntill så att alla ärenden gällande mat, dryck och kök flyter på utan problem."
 				}
 			}
 		],
@@ -100,14 +104,15 @@
 				"id": "Scandic",
 				"iid": "2ad10160-e920-11ef-b55e-610a97912370",
 				"layer": "Work",
-				"x": 1168,
+				"x": 1856,
 				"y": 496,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
 				"customFields": {
 					"workPeriod": "2016 - 2018",
-					"workDescription": "Kock, Hotell Scandic Billingen Skövde\n\nJag arbetade som kock på Hotell Scandic Billingen, där vi serverade lunch på dagarna och à la carte på kvällarna. Mina arbetsuppgifter bestod av att förbereda råvaror, tillaga maträtter samt hålla arbetsytor och köket rent och organiserat.\nUtöver det dagliga arbetet ansvarade vi även för olika evenemang, såsom bröllop och större tillställningar, exempelvis Försvarets vårbal och Gasellbrevet."
+					"workTitle":"Kock, Hotell Scandic Billingen",
+					"workDescription": "Jag arbetade som kock på Hotell Scandic Billingen i skövde, där vi serverade lunch på dagarna och à la carte på kvällarna. Mina arbetsuppgifter bestod av att förbereda råvaror, tillaga maträtter samt hålla arbetsytor och köket rent och organiserat.\nUtöver det dagliga arbetet ansvarade vi även för olika evenemang, såsom bröllop och större tillställningar, exempelvis Försvarets vårbal och Gasellbrevet."
 				}
 			}
 		]
