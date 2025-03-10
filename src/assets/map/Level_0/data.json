@@ -43,7 +43,8 @@
 				"color": 14120515,
 				"customFields": {
 					"workPeriod": "2011",
-					"workDescription": "Säljare, El Giganten AB\n\nNär jag arbetade som säljare på Elgiganten var mitt huvudsakliga ansvar att driva försäljning och uppnå dagsmålen för både vinst och omsättning. Utöver att aktivt hjälpa kunder såg jag till att hyllorna var välfyllda och prydliga samt att butikens exponering var inbjudande och attraktiv."
+					"workTitle": "Säljare, El Giganten AB",
+					"workDescription": "När jag arbetade som säljare på Elgiganten var mitt huvudsakliga ansvar att driva försäljning och uppnå dagsmålen för både vinst och omsättning. Utöver att aktivt hjälpa kunder såg jag till att hyllorna var välfyllda och prydliga samt att butikens exponering var inbjudande och attraktiv."
 				}
 			}
 		],
@@ -106,8 +107,8 @@
 				"layer": "Work",
 				"x": 1856,
 				"y": 496,
-				"width": 16,
-				"height": 16,
+				"width": 20,
+				"height": 20,
 				"color": 12470831,
 				"customFields": {
 					"workPeriod": "2016 - 2018",

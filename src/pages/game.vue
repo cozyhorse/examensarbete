@@ -5,7 +5,9 @@
         <div class="game" ref="gameContainer"></div>
       </v-card>
         <v-btn class="custom-btn" @click="goBack">Back</v-btn>
+
       </div>
+      <Workdialog class="ma-4" title="Work" year="2024 - 2025" description="Worked like a horse"></Workdialog>
   </div>
 </template>
 
@@ -41,6 +43,8 @@ import {
 import { data } from '@/imports/LevelData';
 import { Assets } from 'pixi.js';
 import router from '@/router';
+import Workdialog from '@/components/Workdialog.vue';
+import { entitySetter } from '@/Util/WorkEntitySetter';
 
 const gameContainer = ref<HTMLElement | null>(null)
 const keys: Record<string, boolean> = {};
@@ -156,19 +160,29 @@ const initGame = async () => {
 
   }
 
-  const entity = new PIXI.Sprite(PIXI.Texture.WHITE)
-  entity.anchor.set(0.5, 0.5)
-  entity.width = 10
-  entity.height = 20
-  entity.x = 856
-  entity.y = 1000
-  entity.tint = 8189007
+  // const entity = new PIXI.Sprite(PIXI.Texture.WHITE)
+  // entity.anchor.set(0.5, 0.5)
+  // entity.width = 16
+  // entity.height = 16
+  // entity.x = 1744
+  // entity.y = 720
+  // entity.tint = 1113042
+  // entity.zIndex = 9
+  // world.addChild(entity)
 
-  world.addChild(entity)
+  const scandicEntity = entitySetter(data, "Scandic", world)
+  const ichaEntity = entitySetter(data, "Ichaicha", world)
+  const skovdeEntity = entitySetter(data, "Skovdekommun", world)
+  const majorenEntity = entitySetter(data, "Majoren", world)
+  const elgigantenEntity = entitySetter(data, "ElGiganten", world)
 
-  data.entities.Ichaicha.flatMap(item => {
-    console.log(item);
-  })
+  const entities = {
+    scandicEntity,
+    ichaEntity,
+    skovdeEntity,
+    majorenEntity,
+    elgigantenEntity
+  }
 
 
   window.addEventListener("keyup", (event) => {
@@ -188,17 +202,23 @@ const initGame = async () => {
     let nextX = currentSprite.x;
     let nextY = currentSprite.y;
 
+    for(const entityKey of Object.keys(entities)){
+      const entity = entities[entityKey]
+      if(entity){
+        const playerCollision = currentSprite.getBounds()
+        const entityCollision = entity.getBounds()
 
-    // const playerCollision = currentSprite.getBounds()
-    // const entity1Collision = entity.getBounds()
-    // if (
-    //   playerCollision.x < entity1Collision.x + entity1Collision.width &&
-    //   playerCollision.x + playerCollision.width > entity1Collision.x &&
-    //   playerCollision.y < entity1Collision.y + entity1Collision.height &&
-    //   playerCollision.y + playerCollision.height > entity1Collision.y
-    // ) {
-    //   console.log("Hit Entity 1");
-    // }
+        if (
+          playerCollision.x < entityCollision.x + entityCollision.width &&
+          playerCollision.x + playerCollision.width > entityCollision.x &&
+          playerCollision.y < entityCollision.y + entityCollision.height &&
+          playerCollision.y + playerCollision.height > entityCollision.y
+        ) {
+          console.log("Hit Entity", entityKey);
+        }
+      }
+
+    }
 
 
     if (keys['ArrowUp'] && canMove(nextX, nextY - speed)) {
@@ -284,7 +304,6 @@ const canMove = (x: number, y: number) => {
 const goBack = () => {
   router.back();
 }
-
 
 </script>
 
