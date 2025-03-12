@@ -2,18 +2,30 @@
   <div class="container">
     <div class="game-wrapper">
       <v-card class="custom-card" elevation="5" width="1300" height="700">
-        <div class="game" ref="gameContainer"></div>
+        <div
+          ref="gameContainer"
+          class="game"
+        />
+        <Transition>
+          <Workdialog
+            v-if="showDialog"
+            class="ma-4 workdialog"
+            :work="currentDialogData?.workPlace || 'work'"
+            :title="currentDialogData?.title || 'Work'"
+            :year="currentDialogData?.year || '2024 - 2025'"
+            :description="currentDialogData?.description || 'Worked like a horse'"
+          />
+        </Transition>
       </v-card>
-        <v-btn class="custom-btn" @click="goBack">Back</v-btn>
-
-      </div>
-      <Workdialog class="ma-4" title="Work" year="2024 - 2025" description="Worked like a horse"></Workdialog>
+      <v-btn class="custom-btn" @click="goBack">Back</v-btn>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { PIXI } from '@/pixi';
 import CharacterWalk from '@/assets/spritesheet/CharacterWalk.png'
+import CharacterIdle from '@/assets/spritesheet/CharacterIdle.png'
 import { dataWalkDown, dataWalkUp, dataWalkLeft, dataWalkRight } from '@/animation/Character';
 import { nextTick, onMounted, ref } from 'vue';
 import { createSprite } from '@/Util/SpriteData';
@@ -45,6 +57,9 @@ import { Assets } from 'pixi.js';
 import router from '@/router';
 import Workdialog from '@/components/Workdialog.vue';
 import { entitySetter } from '@/Util/WorkEntitySetter';
+import { dataIdleDown, dataIdleLeft, dataIdleRight, dataIdleUp } from '@/animation/CharacterIdle';
+import { loadCollisionData } from '@/Util/LoadCollision';
+import { canMove } from '@/Util/CanMove';
 
 const gameContainer = ref<HTMLElement | null>(null)
 const keys: Record<string, boolean> = {};
@@ -52,10 +67,14 @@ let currentSprite: PIXI.AnimatedSprite;
 let newSprite: PIXI.AnimatedSprite;
 const speed: number = 3.5;
 const collisionMap = ref<number[][]>([]);
-const tileSize = 16;
+const tileSize: number = 16;
+const showDialog = ref(false)
+const currentDialogData = ref<{workPlace:string, title:string; year: string; description: string;} | null>(null)
+const dataEntities = data.entities;
+let lastDirection: string = "down";
 
 onMounted(async () => {
-  await loadCollisionData();
+  collisionMap.value = await loadCollisionData();
   await nextTick();
   await initGame();
 })
@@ -67,8 +86,6 @@ const initGame = async () => {
 
   const app = new PIXI.Application();
   await app.init({
-    //width: data.width / 2,
-    //height: data.height / 2,
     resizeTo: window,
     backgroundColor: 'grey'
   })
@@ -99,17 +116,19 @@ const initGame = async () => {
   const flowerRedTexture = await layer(flowerRed)
   const flowerWhiteTexture = await layer(flowerWhite)
 
-  world.addChild(groundTexture)
-  world.addChild(roadTexture)
-  world.addChild(flowerWhiteTexture)
-  world.addChild(flowerRedTexture)
-  world.addChild(waterTexture)
-  world.addChild(rocks1Texture)
-  world.addChild(rocks2Texture)
-  world.addChild(greeneryFirst)
-  greenerySecond.zIndex = 8
-  world.addChild(greenerySecond)
-  world.addChild(greeneryThird)
+  world.addChild(groundTexture);
+  world.addChild(roadTexture);
+  world.addChild(flowerWhiteTexture);
+  world.addChild(flowerRedTexture);
+  world.addChild(waterTexture);
+  world.addChild(rocks1Texture);
+  world.addChild(rocks2Texture);
+  greeneryFirst.zIndex = 8;
+  world.addChild(greeneryFirst);
+  greenerySecond.zIndex = 8;
+  world.addChild(greenerySecond);
+  world.addChild(greeneryThird);
+  greeneryFourth.zIndex = 8;
   world.addChild(greeneryFourth)
   greeneryMiscTexture.zIndex = 6
   world.addChild(greeneryMiscTexture)
@@ -126,24 +145,27 @@ const initGame = async () => {
   buildings1Back.zIndex = 9
   world.addChild(buildings1Back)
 
-
+  await Assets.load(CharacterIdle)
   await Assets.load(CharacterWalk)
+  const idleLeft = await createSprite(dataIdleLeft)
+  const idleRight = await createSprite(dataIdleRight)
+  const idleUp = await createSprite(dataIdleUp)
+  const idledown = await createSprite(dataIdleDown)
+
   const walkLeft = await createSprite(dataWalkLeft)
   const walkRight = await createSprite(dataWalkRight)
   const walkDown = await createSprite(dataWalkDown)
   const walkUp = await createSprite(dataWalkUp)
 
-  // app.stage.addChild(aWalkDown)
-  // aWalkDown.animationSpeed = 0.1
-  // aWalkDown.play()
-  //app.stage.addChild(currentSprite)
-  currentSprite = walkLeft
-  currentSprite.anchor.set(1);
-  currentSprite.x = 1550;
+  currentSprite = idleLeft
+  currentSprite.anchor.set(0.5);
+  currentSprite.x = 1545;
   currentSprite.y = 1200;
   currentSprite.zIndex = 7
+  currentSprite.animationSpeed = 0.13
+  currentSprite.play();
+
   world.addChild(currentSprite)
-  console.log("sprite",currentSprite.width);
 
   const switchSprite = (newSprite: PIXI.AnimatedSprite) => {
     if (newSprite !== currentSprite) {
@@ -160,34 +182,38 @@ const initGame = async () => {
 
   }
 
-  // const entity = new PIXI.Sprite(PIXI.Texture.WHITE)
-  // entity.anchor.set(0.5, 0.5)
-  // entity.width = 16
-  // entity.height = 16
-  // entity.x = 1744
-  // entity.y = 720
-  // entity.tint = 1113042
-  // entity.zIndex = 9
-  // world.addChild(entity)
+  const scandic = entitySetter(data, "scandic", world)
+  const ichaicha = entitySetter(data, "ichaicha", world)
+  const skovdekommun = entitySetter(data, "skovdekommun", world)
+  const majoren = entitySetter(data, "majoren", world)
+  const elgiganten = entitySetter(data, "elgiganten", world)
 
-  const scandicEntity = entitySetter(data, "Scandic", world)
-  const ichaEntity = entitySetter(data, "Ichaicha", world)
-  const skovdeEntity = entitySetter(data, "Skovdekommun", world)
-  const majorenEntity = entitySetter(data, "Majoren", world)
-  const elgigantenEntity = entitySetter(data, "ElGiganten", world)
-
-  const entities = {
-    scandicEntity,
-    ichaEntity,
-    skovdeEntity,
-    majorenEntity,
-    elgigantenEntity
+  const entities: Record<string, PIXI.Sprite | null> = {
+    scandic,
+    ichaicha,
+    skovdekommun,
+    majoren,
+    elgiganten
   }
-
 
   window.addEventListener("keyup", (event) => {
     keys[event.key] = false;
     currentSprite.stop();
+
+    switch(lastDirection){
+      case "up":
+        switchSprite(idleUp)
+        break;
+      case "down":
+        switchSprite(idledown)
+        break;
+      case "left":
+        switchSprite(idleLeft)
+        break;
+      case "right":
+        switchSprite(idleRight)
+        break;
+    }
   })
 
   window.addEventListener("keydown", (event) => {
@@ -201,6 +227,7 @@ const initGame = async () => {
     newSprite.zIndex = 7
     let nextX = currentSprite.x;
     let nextY = currentSprite.y;
+    let collisionChecker: boolean = false
 
     for(const entityKey of Object.keys(entities)){
       const entity = entities[entityKey]
@@ -214,38 +241,60 @@ const initGame = async () => {
           playerCollision.y < entityCollision.y + entityCollision.height &&
           playerCollision.y + playerCollision.height > entityCollision.y
         ) {
-          console.log("Hit Entity", entityKey);
+          collisionChecker = true;
+          showDialog.value = true;
+
+          const entityData = (dataEntities as any)[entityKey]
+
+            currentDialogData.value = {
+              workPlace: entityData[0].customFields.workPlace,
+              title: entityData[0].customFields.workTitle,
+              year: entityData[0].customFields.workYear,
+              description: entityData[0].customFields.workDescription
+            }
+
+          //console.log("Hit Entity", entityKey);
+          break;
         }
       }
 
     }
 
+    if(!collisionChecker){
+      showDialog.value = false;
+      currentDialogData.value = null
+    }
 
-    if (keys['ArrowUp'] && canMove(nextX, nextY - speed)) {
+
+    if (keys['ArrowUp'] && canMove(nextX, nextY - speed, currentSprite, collisionMap, tileSize)) {
       nextY -= speed
       newSprite = walkUp
+      lastDirection = "up"
       currentSprite.y -= speed
       currentSprite.play()
 
     }
 
-    if (keys['ArrowDown'] && canMove(nextX, nextY + speed)) {
+    if (keys['ArrowDown'] && canMove(nextX, nextY + speed, currentSprite, collisionMap, tileSize)) {
       nextY += speed
       newSprite = walkDown
+      lastDirection = "down"
       currentSprite.y += speed
       currentSprite.play()
     }
 
-    if (keys['ArrowLeft'] && canMove(nextX - speed, nextY)) {
+    if (keys['ArrowLeft'] && canMove(nextX - speed, nextY, currentSprite, collisionMap, tileSize)) {
       nextX -= speed
       newSprite = walkLeft
+      lastDirection = "left"
       currentSprite.x -= speed
       currentSprite.play()
     }
 
-    if (keys['ArrowRight'] && canMove(nextX + speed, nextY)) {
+    if (keys['ArrowRight'] && canMove(nextX + speed, nextY, currentSprite, collisionMap, tileSize)) {
       nextX += speed
       newSprite = walkRight
+      lastDirection = "right"
       currentSprite.x += speed
       currentSprite.play()
     }
@@ -257,49 +306,9 @@ const initGame = async () => {
   })
 }
 
-const loadCollisionData = async () => {
-  const response = await fetch("/Collision.csv")
-  const text = await response.text();
-  const parsed = text
-    .trim()
-    .split("\n")
-    .map(row => row.split(",").map(cell => {
-      const num = Number(cell);
-      if (isNaN(num)) console.error("Invalid number found:", cell);
-      return num;
-    }));
 
-  console.log("Parsed Collision Map:", parsed);
-  collisionMap.value = parsed;
-  console.log("map", collisionMap);
-}
 
-const canMove = (x: number, y: number) => {
-  const playerWidth = currentSprite.width;   // Get player width
-  const playerHeight = currentSprite.height; // Get player height
 
-  // Check all four corners
-  const corners = [
-    { x: x - playerWidth / 2, y: y - playerHeight / 2 }, // Top-left
-    { x: x + playerWidth / 2, y: y - playerHeight / 2 }, // Top-right
-    { x: x - playerWidth / 2, y: y + playerHeight / 2 }, // Bottom-left
-    { x: x + playerWidth / 2, y: y + playerHeight / 2 }  // Bottom-right
-  ];
-
-  return corners.every(corner => {
-    const tileX = Math.floor(corner.x / tileSize);
-    const tileY = Math.floor(corner.y / tileSize);
-
-    if (
-      tileY < 0 || tileY >= collisionMap.value.length ||
-      tileX < 0 || tileX >= collisionMap.value[0].length
-    ) {
-      return false; // Out of bounds
-    }
-
-    return collisionMap.value[tileY][tileX] === 0;
-  });
-};
 
 const goBack = () => {
   router.back();
@@ -309,20 +318,13 @@ const goBack = () => {
 
 <style lang="scss" scoped>
 
-// .container{
-//   position: absolute;
-// }
-
 .custom-btn{
   position: relative;
   top: -50px;
   left: 150px;
 }
 
-
-
 .game-wrapper {
-  //width: 1600px;  // Set desired width
   height: 710px; // Set desired height
   overflow: hidden;
   position: relative;
@@ -337,5 +339,21 @@ const goBack = () => {
   width: 100%;
   height: 100%;
   transform: scale(1);
+}
+
+.workdialog{
+  position: relative;
+  top: -560px;
+  left: 0px;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
