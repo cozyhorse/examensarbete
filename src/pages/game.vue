@@ -98,6 +98,7 @@ const initGame = async () => {
   app.stage.addChild(world)
   world.sortableChildren = true
 
+
   const waterTexture = await layer(water)
   const groundTexture = await layer(ground)
   const roadTexture = await layer(road)
