@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="game-wrapper">
-      <v-card class="custom-card" elevation="5" width="1300" height="700">
+      <v-card class="custom-card" elevation="5" width="1650" height="900">
         <div
           ref="gameContainer"
           class="game"
@@ -320,7 +320,7 @@ const initGame = async () => {
     switchSprite(newSprite);
 
     world.x = -currentSprite.x + app.screen.width * 0.4;
-    world.y = -currentSprite.y + app.screen.height * 0.3;
+    world.y = -currentSprite.y + app.screen.height * 0.4;
   })
 }
 
@@ -347,7 +347,7 @@ const goBack = () => {
 }
 
 .game-wrapper {
-  height: 710px; // Set desired height
+  height:1000px;
   overflow: hidden;
   position: relative;
 }
@@ -360,7 +360,7 @@ const goBack = () => {
 .game {
   width: 100%;
   height: 100%;
-  transform: scale(1);
+  transform: scale(1.3);
 }
 
 .workdialog{

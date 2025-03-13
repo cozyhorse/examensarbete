@@ -1,5 +1,5 @@
 <template>
-  <v-card class="main-card" width="1300" height="700" elevation="5">
+  <v-card class="main-card" width="1650" height="900" elevation="5">
     <v-container class="customContainer d-flex justify-center align-center" fluid>
         <v-row justify="center" no-gutters>
             <v-btn class="custom-btn" width="300" height="55" @click="onClick"></v-btn>
@@ -19,7 +19,7 @@ const onClick = () => {
 
 <style scoped lang="scss">
 .customContainer{
-  height:700px ;
+  height:1000px ;
   background-image: url("/src/assets/map/Level_0/_composite.png");
   background-position: center center;
   overflow: hidden;
