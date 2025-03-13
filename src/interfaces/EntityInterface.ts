@@ -26,7 +26,7 @@ interface IEntity {
 
 interface ICustomFieldInEntity {
   workPlace: string;
-  workPeriod: string;
+  workYear: string;
   workTitle: string;
   workDescription: string;
 }

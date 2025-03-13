@@ -17,7 +17,7 @@
           />
         </Transition>
       </v-card>
-      <v-btn class="custom-btn" @click="goBack">Back</v-btn>
+      <v-btn class="custom-btn" @click="goBack"></v-btn>
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@
 import { PIXI } from '@/pixi';
 import CharacterWalk from '@/assets/spritesheet/CharacterWalk.png'
 import CharacterIdle from '@/assets/spritesheet/CharacterIdle.png'
+import CampFire from "@/assets/spritesheet/Campfire.png"
 import { dataWalkDown, dataWalkUp, dataWalkLeft, dataWalkRight } from '@/animation/Character';
 import { nextTick, onMounted, ref } from 'vue';
 import { createSprite } from '@/Util/SpriteData';
@@ -51,6 +52,7 @@ import {
   buildingsFront,
   buildings2,
   buildings2Front,
+  wellFront,
 } from '@/imports/Levels';
 import { data } from '@/imports/LevelData';
 import { Assets } from 'pixi.js';
@@ -60,6 +62,7 @@ import { entitySetter } from '@/Util/WorkEntitySetter';
 import { dataIdleDown, dataIdleLeft, dataIdleRight, dataIdleUp } from '@/animation/CharacterIdle';
 import { loadCollisionData } from '@/Util/LoadCollision';
 import { canMove } from '@/Util/CanMove';
+import { dataFire } from '@/animation/Fire';
 
 const gameContainer = ref<HTMLElement | null>(null)
 const keys: Record<string, boolean> = {};
@@ -115,6 +118,7 @@ const initGame = async () => {
   const wellTexture = await layer(well)
   const flowerRedTexture = await layer(flowerRed)
   const flowerWhiteTexture = await layer(flowerWhite)
+  const wellFrontTexture = await layer(wellFront)
 
   world.addChild(groundTexture);
   world.addChild(roadTexture);
@@ -141,9 +145,22 @@ const initGame = async () => {
   world.addChild(propsBehindTexture)
   gateTexture.zIndex = 8
   world.addChild(gateTexture)
+  wellFrontTexture.zIndex = 9
+  world.addChild(wellFrontTexture)
   world.addChild(wellTexture)
   buildings1Back.zIndex = 9
   world.addChild(buildings1Back)
+
+
+  await Assets.load(CampFire)
+  const fireIdle1 = await createSprite(dataFire)
+  fireIdle1.x = 1360
+  fireIdle1.y = 1021
+  fireIdle1.scale = 0.4
+  fireIdle1.zIndex = 6
+  fireIdle1.animationSpeed = 0.1
+  fireIdle1.play()
+  world.addChild(fireIdle1)
 
   await Assets.load(CharacterIdle)
   await Assets.load(CharacterWalk)
@@ -306,10 +323,6 @@ const initGame = async () => {
   })
 }
 
-
-
-
-
 const goBack = () => {
   router.back();
 }
@@ -322,6 +335,14 @@ const goBack = () => {
   position: relative;
   top: -50px;
   left: 150px;
+  background: none;
+  background-image: url("/src/assets/back.gif");
+  background-position: center center;
+  background-size: 70px;
+  background-repeat: no-repeat;
+}
+::v-deep(.v-btn--variant-elevated){
+  box-shadow: none;
 }
 
 .game-wrapper {
@@ -356,4 +377,5 @@ const goBack = () => {
 .v-leave-to {
   opacity: 0;
 }
+
 </style>

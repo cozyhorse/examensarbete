@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  vue-app:
+    container_name: TheeraphanCVTown-vue
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cvtown
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/app/src  # Mounts source files for hot reload
+      - ./public:/app/public
+    environment:
+      - NODE_ENV=development
+    command: npm run dev  # Run dev server for hot reload in Vue

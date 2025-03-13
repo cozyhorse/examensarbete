@@ -1,24 +1,15 @@
 <template>
   <v-app>
-    <v-col
-      cols="1"
-      align-self="center"
-    >
-      Hello
-    </v-col>
+    <HeaderApp />
     <v-main>
       <router-view />
     </v-main>
-    <v-col
-      cols="1"
-      align-self="center"
-    >
-      Footer
-    </v-col>
+    <FooterApp />
   </v-app>
 </template>
 
 <script lang="ts" setup>
+import FooterApp from './components/FooterApp.vue';
 
-  //
+
 </script>

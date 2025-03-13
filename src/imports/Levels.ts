@@ -17,11 +17,13 @@ import props from "../assets/map/Level_0/Props.png"
 import propsbehind from "../assets/map/Level_0/PropsBehind.png"
 import gate from "../assets/map/Level_0/Prop2.png"
 import well from "../assets/map/Level_0/Prop3.png"
+import wellFront from "../assets/map/Level_0/Prop3front.png"
 //Buildings
 import buildings from "../assets/map/Level_0/Buildings.png"
 import buildingsFront from "../assets/map/Level_0/BuildingsFront.png"
 import buildings2 from "../assets/map/Level_0/Building2.png"
 import buildings2Front from "../assets/map/Level_0/Building2Front.png"
+
 
 
 
@@ -43,6 +45,7 @@ export {
   propsbehind,
   gate,
   well,
+  wellFront,
   buildings,
   buildingsFront,
   buildings2,
