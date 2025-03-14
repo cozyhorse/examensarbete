@@ -68,7 +68,7 @@ const gameContainer = ref<HTMLElement | null>(null)
 const keys: Record<string, boolean> = {};
 let currentSprite: PIXI.AnimatedSprite;
 let newSprite: PIXI.AnimatedSprite;
-const speed: number = 3.5;
+const speed: number = 2.5;
 const collisionMap = ref<number[][]>([]);
 const tileSize: number = 16;
 const showDialog = ref(false)
@@ -205,13 +205,17 @@ const initGame = async () => {
   const skovdekommun = entitySetter(data, "skovdekommun", world)
   const majoren = entitySetter(data, "majoren", world)
   const elgiganten = entitySetter(data, "elgiganten", world)
+  const construction = entitySetter(data, "construction", world)
+  const construction2 = entitySetter(data, "construction2", world)
 
   const entities: Record<string, PIXI.Sprite | null> = {
     scandic,
     ichaicha,
     skovdekommun,
     majoren,
-    elgiganten
+    elgiganten,
+    construction,
+    construction2,
   }
 
   window.addEventListener("keyup", (event) => {

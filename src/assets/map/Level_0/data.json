@@ -38,7 +38,7 @@
 				"layer": "Work",
 				"x": 1568,
 				"y": 944,
-				"width": 16,
+				"width": 25,
 				"height": 16,
 				"color": 14120515,
 				"customFields": {
@@ -56,7 +56,7 @@
 				"layer": "Work",
 				"x": 1744,
 				"y": 720,
-				"width": 16,
+				"width": 25,
 				"height": 16,
 				"color": 12470831,
 				"customFields": {
@@ -75,7 +75,7 @@
 				"layer": "Work",
 				"x": 2080,
 				"y": 688,
-				"width": 16,
+				"width": 25,
 				"height": 16,
 				"color": 12470831,
 				"customFields": {
@@ -93,7 +93,7 @@
 				"layer": "Work",
 				"x": 1080,
 				"y": 816,
-				"width": 16,
+				"width": 25,
 				"height": 16,
 				"color": 12470831,
 				"customFields": {
@@ -111,7 +111,7 @@
 				"layer": "Work",
 				"x": 1856,
 				"y": 496,
-				"width": 20,
+				"width": 25,
 				"height": 20,
 				"color": 12470831,
 				"customFields": {
@@ -119,6 +119,42 @@
 					"workYear": "2016 - 2018",
 					"workTitle":"Kock",
 					"workDescription": "Jag arbetade som kock på Hotell Scandic Billingen i skövde, där vi serverade lunch på dagarna och à la carte på kvällarna. Mina arbetsuppgifter bestod av att förbereda råvaror, tillaga maträtter samt hålla arbetsytor och köket rent och organiserat.\nUtöver det dagliga arbetet ansvarade vi även för olika evenemang, såsom bröllop och större tillställningar, exempelvis Försvarets vårbal och Gasellbrevet."
+				}
+			}
+		],
+		"construction": [
+			{
+				"id": "Construction",
+				"iid": "8e40ad10-e920-11ef-8343-5d9aaccfc752",
+				"layer": "Work",
+				"x": 2176,
+				"y": 915,
+				"width": 25,
+				"height": 25,
+				"color": 9571376,
+				"customFields": {
+					"workYear": "När jag slutar på mitt nästa jobb..",
+					"workDescription": "Område avstängt tillsvidare",
+					"workPlace": "under konstruktion",
+					"workTitle": "under konstruktion"
+				}
+			}
+		],
+		"construction2": [
+			{
+				"id": "Construction",
+				"iid": "8e40ad10-e920-11ef-8343-5d9aaccfc752",
+				"layer": "Work",
+				"x": 2176,
+				"y": 908,
+				"width": 25,
+				"height": 25,
+				"color": 9571376,
+				"customFields": {
+					"workYear": "När jag slutar på mitt nästa jobb..",
+					"workDescription": "Område avstängt tillsvidare",
+					"workPlace": "under konstruktion",
+					"workTitle": "under konstruktion"
 				}
 			}
 		]
