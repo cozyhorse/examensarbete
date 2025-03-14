@@ -6,7 +6,7 @@ export const entitySetter = (data: IGameData, work: string, world: PIXI.Containe
   const entityData = data.entities[work];
   const item = entityData[0];
 
-  const entity = new PIXI.Sprite(Texture.WHITE);
+  const entity = new PIXI.Sprite();
   entity.anchor.set(0.5);
   entity.width = item.width;
   entity.height = item.height;
