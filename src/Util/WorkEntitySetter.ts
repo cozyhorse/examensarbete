@@ -1,6 +1,5 @@
 import type { IGameData } from "@/interfaces/EntityInterface";
 import { PIXI } from "@/pixi";
-import { Texture } from "pixi.js";
 
 export const entitySetter = (data: IGameData, work: string, world: PIXI.Container): PIXI.Sprite | null => {
   const entityData = data.entities[work];
