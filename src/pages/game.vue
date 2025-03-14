@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="game-wrapper">
-      <v-card class="custom-card" elevation="5" width="1650" height="900">
+      <v-card class="custom-card" elevation="5">
         <div
           ref="gameContainer"
           class="game"
@@ -16,8 +16,8 @@
             :description="currentDialogData?.description || 'Worked like a horse'"
           />
         </Transition>
+        <v-btn class="custom-btn" @click="goBack"></v-btn>
       </v-card>
-      <v-btn class="custom-btn" @click="goBack"></v-btn>
     </div>
   </div>
 </template>
@@ -335,7 +335,7 @@ const goBack = () => {
 .custom-btn{
   position: relative;
   top: -50px;
-  left: 150px;
+  left: 110px;
   background: none;
   background-image: url("/src/assets/back.gif");
   background-position: center center;
@@ -347,12 +347,21 @@ const goBack = () => {
 }
 
 .game-wrapper {
-  height:1000px;
+  height: 86vh;
+  width: 100vw;
   overflow: hidden;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.custom-card{
+.custom-card {
+  width: 100%;
+  height: 100%;
+  max-width: 1650px;
+  max-height: 900px;
+  aspect-ratio: 16 / 9;
   margin: auto;
   overflow: hidden;
 }
