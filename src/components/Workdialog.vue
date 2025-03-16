@@ -44,4 +44,5 @@ const props = defineProps<{
 .custom-card{
   opacity: 0.8;
 }
+
 </style>

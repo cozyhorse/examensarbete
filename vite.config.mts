@@ -52,7 +52,7 @@ export default defineConfig({
     port: 3000,
   },
   preview: {
-    allowedHosts: ['walrus-app-2x5mn.ondigitalocean.app', 'all']
+    allowedHosts: ['walrus-app-2x5mn.ondigitalocean.app', 'all', 'theeraphan.com'],
   },
   css: {
     preprocessorOptions: {
