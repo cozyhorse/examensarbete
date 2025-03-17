@@ -33,7 +33,7 @@ const onClick = () => {
 
 
 .main-card {
-  width: 100%;
+  width: 86%;
   height: 86vh;
   max-width: 1650px;
   max-height: 900px;
