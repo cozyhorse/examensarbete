@@ -43,6 +43,17 @@ const props = defineProps<{
 <style scoped>
 .custom-card{
   opacity: 0.8;
+
+  @media (max-width: 1024px) {
+    max-width: 80%;
+    padding: 10px;
+  }
+
+  @media (max-width: 600px) {
+    max-width: 90%;
+    padding: 8px;
+  }
+
 }
 
 </style>

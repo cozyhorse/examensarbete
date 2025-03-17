@@ -30,6 +30,8 @@ const onClick = () => {
   align-items: center;
 }
 
+
+
 .main-card {
   width: 100%;
   height: 86vh;
@@ -41,6 +43,14 @@ const onClick = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 1024px) {
+    max-width: 900px; // Shrinks more for smaller laptops
+  }
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+  }
 }
 
 .custom-btn{
