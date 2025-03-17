@@ -352,9 +352,10 @@ const goBack = () => {
 
 .game-wrapper {
   height: 86vh;
-  width: 100vw;
+  width: 86vw;
   overflow: hidden;
   position: relative;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -378,7 +379,7 @@ const goBack = () => {
 
 .workdialog{
   position: relative;
-  top: -560px;
+  top: -540px;
   left: 0px;
 }
 
