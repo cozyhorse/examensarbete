@@ -44,7 +44,7 @@ const props = defineProps<{
 .custom-card{
   opacity: 0.8;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1350px) {
     max-width: 80%;
     padding: 10px;
     scale: 0.75;
@@ -52,7 +52,7 @@ const props = defineProps<{
 
   @media (max-width: 600px) {
     max-width: 90%;
-    scale: 0.8;
+    scale: 0.6;
     padding: 8px;
   }
 
