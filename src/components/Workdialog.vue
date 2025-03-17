@@ -44,10 +44,10 @@ const props = defineProps<{
 .custom-card{
   opacity: 0.8;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     max-width: 80%;
     padding: 10px;
-    scale: 0.8;
+    scale: 0.75;
   }
 
   @media (max-width: 600px) {
