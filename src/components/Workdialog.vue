@@ -30,9 +30,10 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
-const props = defineProps<{
-  work: string;
+defineProps<{
+  work?: string;
   title?: string;
   year?: string;
   description?: string;

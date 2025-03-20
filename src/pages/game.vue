@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div class="game-wrapper">
-      <v-card class="custom-card" elevation="5">
+      <v-card
+        class="custom-card"
+        elevation="5"
+      >
         <div
           ref="gameContainer"
           class="game"
@@ -16,7 +19,10 @@
             :description="currentDialogData?.description || 'Worked like a horse'"
           />
         </Transition>
-        <v-btn class="custom-btn" @click="goBack"></v-btn>
+        <v-btn
+          class="custom-btn"
+          @click="goBack"
+        />
       </v-card>
     </div>
   </div>
