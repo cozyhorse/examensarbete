@@ -1,11 +1,24 @@
 <template>
-  <v-card class="main-card" elevation="5">
-    <v-container class="customContainer d-flex justify-center align-center" fluid>
-        <v-row justify="center" no-gutters>
-            <v-btn class="custom-btn" width="300" height="55" @click="onClick"></v-btn>
-        </v-row>
+  <v-card
+    class="main-card"
+    elevation="5"
+  >
+    <v-container
+      class="customContainer d-flex justify-center align-center"
+      fluid
+    >
+      <v-row
+        justify="center"
+        no-gutters
+      >
+        <v-btn
+          class="custom-btn"
+          width="300"
+          height="55"
+          @click="onClick"
+        />
+      </v-row>
     </v-container>
-
   </v-card>
 </template>
 
