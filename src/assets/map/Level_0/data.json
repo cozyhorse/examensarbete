@@ -33,7 +33,7 @@
 	"entities": {
 		"elgiganten": [
 			{
-				"id": "ElGiganten",
+				"id": "elgiganten",
 				"iid": "8b577ae0-e920-11ef-b55e-a5eb3db2e3f6",
 				"layer": "Work",
 				"x": 1568,
@@ -51,7 +51,7 @@
 		],
 		"ichaicha": [
 			{
-				"id": "Ichaicha",
+				"id": "ichaicha",
 				"iid": "9a2d6f10-e920-11ef-b55e-2701e29671dc",
 				"layer": "Work",
 				"x": 1744,
@@ -70,7 +70,7 @@
 		],
 		"skovdekommun": [
 			{
-				"id": "Skovdekommun",
+				"id": "skovdekommun",
 				"iid": "152cd820-e920-11ef-b55e-f5b98d59aba4",
 				"layer": "Work",
 				"x": 2080,
@@ -88,7 +88,7 @@
 		],
 		"majoren": [
 			{
-				"id": "Majoren",
+				"id": "majoren",
 				"iid": "284f86a0-e920-11ef-b55e-1f595b4c60e1",
 				"layer": "Work",
 				"x": 1080,
@@ -106,7 +106,7 @@
 		],
 		"scandic": [
 			{
-				"id": "Scandic",
+				"id": "scandic",
 				"iid": "2ad10160-e920-11ef-b55e-610a97912370",
 				"layer": "Work",
 				"x": 1856,
@@ -124,7 +124,7 @@
 		],
 		"construction": [
 			{
-				"id": "Construction",
+				"id": "construction",
 				"iid": "8e40ad10-e920-11ef-8343-5d9aaccfc752",
 				"layer": "Work",
 				"x": 2176,
@@ -142,7 +142,7 @@
 		],
 		"construction2": [
 			{
-				"id": "Construction",
+				"id": "construction2",
 				"iid": "8e40ad10-e920-11ef-8343-5d9aaccfc752",
 				"layer": "Work",
 				"x": 2176,

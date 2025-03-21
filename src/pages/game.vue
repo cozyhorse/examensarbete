@@ -24,6 +24,18 @@
           @click="goBack"
         />
       </v-card>
+      <v-card width="300" color="grey" class="pa-3">
+        <v-col class="pa-0">
+          <h3>Quest log</h3>
+        </v-col>
+        <v-divider class="ma-1"></v-divider>
+        <v-col v-for="[name, value] in Object.entries(entityHitData)" :key="name">
+          <v-row>
+            <p v-if="value" class="mr-2">visited</p><p>{{ name }}</p>
+          </v-row>
+        </v-col>
+
+      </v-card>
     </div>
   </div>
 </template>
@@ -81,6 +93,14 @@ const showDialog = ref(false)
 const currentDialogData = ref<{workPlace:string, title:string; year: string; description: string;} | null>(null)
 const dataEntities = data.entities;
 let lastDirection: string = "down";
+
+const entityHitData =  ref<Record<string, boolean | null>>({
+  scandic: false,
+  ichaicha: false,
+  skovdekommun: false,
+  majoren: false,
+  elgiganten: false,
+})
 
 onMounted(async () => {
   collisionMap.value = await loadCollisionData();
@@ -224,6 +244,8 @@ const initGame = async () => {
     construction2,
   }
 
+
+
   window.addEventListener("keyup", (event) => {
     keys[event.key] = false;
     currentSprite.stop();
@@ -273,13 +295,15 @@ const initGame = async () => {
           showDialog.value = true;
 
           const entityData = (dataEntities as any)[entityKey]
-
             currentDialogData.value = {
               workPlace: entityData[0].customFields.workPlace,
               title: entityData[0].customFields.workTitle,
               year: entityData[0].customFields.workYear,
               description: entityData[0].customFields.workDescription
             }
+
+            entityHitData.value[entityKey] = true
+            console.log(entityHitData);
 
           //console.log("Hit Entity", entityKey);
           break;
@@ -344,8 +368,10 @@ const goBack = () => {
 
 .custom-btn{
   position: relative;
-  top: -50px;
-  left: 110px;
+  // top: -50px;
+  // left: 110px;
+  margin-top: -123px;
+  margin-left: 50px;
   background: none;
   background-image: url("/src/assets/back.gif");
   background-position: center center;
