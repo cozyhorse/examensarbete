@@ -4,7 +4,7 @@
       class="custom-card pa-2"
       height="auto"
       width="600"
-      color="orange-lighten-4"
+      color="grey-darken-1"
     >
       <v-row>
         <v-col>
@@ -30,9 +30,10 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
-const props = defineProps<{
-  work: string;
+defineProps<{
+  work?: string;
   title?: string;
   year?: string;
   description?: string;
@@ -42,7 +43,7 @@ const props = defineProps<{
 
 <style scoped>
 .custom-card{
-  opacity: 0.8;
+  opacity: 0.9;
 
   @media (max-width: 1350px) {
     max-width: 80%;

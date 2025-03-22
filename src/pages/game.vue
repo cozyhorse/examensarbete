@@ -1,11 +1,38 @@
 <template>
   <div class="container">
     <div class="game-wrapper">
-      <v-card class="custom-card" elevation="5">
+      <v-card
+        class="custom-card"
+        elevation="5"
+      >
         <div
           ref="gameContainer"
           class="game"
         />
+        <v-card
+          v-if="showQuestLog"
+          width="300"
+          color="grey-darken-1"
+          class="pa-3 quest-log"
+        >
+          <v-col class="">
+            <v-row>
+              <h3>Quest log </h3><v-img inline :src="book" height="25" width="25" />
+            </v-row>
+            <v-row>
+              <p>Visit all my workplaces <v-img inline :src="list" height="25" width="25" /> </p>
+            </v-row>
+          </v-col>
+          <v-divider class="ma-1" />
+          <v-col
+            v-for="[name, value] in Object.entries(entityHitData)"
+            :key="name"
+          >
+            <v-row>
+              <img v-if="value" class="mr-2" :src="yellowstar" /> <p>{{ name }}</p>
+            </v-row>
+          </v-col>
+        </v-card>
         <Transition>
           <Workdialog
             v-if="showDialog"
@@ -16,7 +43,10 @@
             :description="currentDialogData?.description || 'Worked like a horse'"
           />
         </Transition>
-        <v-btn class="custom-btn" @click="goBack"></v-btn>
+        <v-btn
+          class="custom-btn"
+          @click="goBack"
+        />
       </v-card>
     </div>
   </div>
@@ -63,6 +93,9 @@ import { dataIdleDown, dataIdleLeft, dataIdleRight, dataIdleUp } from '@/animati
 import { loadCollisionData } from '@/Util/LoadCollision';
 import { canMove } from '@/Util/CanMove';
 import { dataFire } from '@/animation/Fire';
+import yellowstar from '@/assets/starYellow.png'
+import book from '@/assets/book.png'
+import list from '@/assets/list.png'
 
 const gameContainer = ref<HTMLElement | null>(null)
 const keys: Record<string, boolean> = {};
@@ -75,11 +108,21 @@ const showDialog = ref(false)
 const currentDialogData = ref<{workPlace:string, title:string; year: string; description: string;} | null>(null)
 const dataEntities = data.entities;
 let lastDirection: string = "down";
+const showQuestLog = ref(false);
+
+const entityHitData =  ref<Record<string, boolean | null>>({
+  scandic: false,
+  ichaicha: false,
+  skovdekommun: false,
+  majoren: false,
+  elgiganten: false,
+})
 
 onMounted(async () => {
   collisionMap.value = await loadCollisionData();
   await nextTick();
   await initGame();
+  showQuestLog.value = true;
 })
 const initGame = async () => {
   if (!gameContainer.value) {
@@ -218,6 +261,8 @@ const initGame = async () => {
     construction2,
   }
 
+
+
   window.addEventListener("keyup", (event) => {
     keys[event.key] = false;
     currentSprite.stop();
@@ -267,7 +312,6 @@ const initGame = async () => {
           showDialog.value = true;
 
           const entityData = (dataEntities as any)[entityKey]
-
             currentDialogData.value = {
               workPlace: entityData[0].customFields.workPlace,
               title: entityData[0].customFields.workTitle,
@@ -275,6 +319,7 @@ const initGame = async () => {
               description: entityData[0].customFields.workDescription
             }
 
+            entityHitData.value[entityKey] = true
           //console.log("Hit Entity", entityKey);
           break;
         }
@@ -338,13 +383,40 @@ const goBack = () => {
 
 .custom-btn{
   position: relative;
-  top: -50px;
-  left: 110px;
+  // top: -50px;
+  // left: 110px;
+  margin-top: -123px;
+  margin-left: 50px;
   background: none;
   background-image: url("/src/assets/back.gif");
   background-position: center center;
   background-size: 70px;
   background-repeat: no-repeat;
+}
+.quest-log{
+  margin-top: -800px;
+  margin-right: 50px;
+  float: right;
+  opacity: 0.9;
+
+  @media (max-width: 1350px) {
+    max-width: 80%;
+    padding: 10px;
+    margin-top: -600px;
+    margin-right: 50px;
+    scale: 0.75;
+  }
+
+  @media (max-width: 600px) {
+    max-width: 90%;
+    scale: 0.6;
+    padding: 8px;
+  }
+
+  img{
+    height: 20px;
+    width: 20px;
+  }
 }
 ::v-deep(.v-btn--variant-elevated){
   box-shadow: none;
