@@ -13,6 +13,17 @@ import App from './App.vue'
 // Composables
 import { createApp } from 'vue'
 
+const maxLogs = 500;
+let logCount = 0;
+
+const originalLog = console.log;
+console.log = (...args) => {
+  if (logCount < maxLogs) {
+    originalLog(...args);
+    logCount++;
+  }
+};
+
 const app = createApp(App)
 
 registerPlugins(app)
