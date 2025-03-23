@@ -261,8 +261,6 @@ const initGame = async () => {
     construction2,
   }
 
-
-
   window.addEventListener("keyup", (event) => {
     keys[event.key] = false;
     currentSprite.stop();
@@ -296,10 +294,11 @@ const initGame = async () => {
     let nextY = currentSprite.y;
     let collisionChecker: boolean = false
 
+    const playerCollision = currentSprite.getBounds()
     for(const entityKey of Object.keys(entities)){
       const entity = entities[entityKey]
       if(entity){
-        const playerCollision = currentSprite.getBounds()
+        console.log(entity);
         const entityCollision = entity.getBounds()
 
         if (
@@ -383,8 +382,6 @@ const goBack = () => {
 
 .custom-btn{
   position: relative;
-  // top: -50px;
-  // left: 110px;
   margin-top: -123px;
   margin-left: 50px;
   background: none;
