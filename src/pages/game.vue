@@ -141,7 +141,6 @@ const initGame = async () => {
   app.stage.addChild(world)
   world.sortableChildren = true
 
-
   const waterTexture = await layer(water)
   const groundTexture = await layer(ground)
   const roadTexture = await layer(road)
@@ -318,7 +317,6 @@ const initGame = async () => {
             }
 
             entityHitData.value[entityKey] = true
-          //console.log("Hit Entity", entityKey);
           break;
         }
       }
