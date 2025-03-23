@@ -298,7 +298,6 @@ const initGame = async () => {
     for(const entityKey of Object.keys(entities)){
       const entity = entities[entityKey]
       if(entity){
-        console.log(entity);
         const entityCollision = entity.getBounds()
 
         if (
