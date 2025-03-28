@@ -286,13 +286,15 @@ const initGame = async () => {
     event.preventDefault();
   })
 
-  app.ticker.add(() => {
+
+  app.ticker.add((ticker) => {
+    const newSpeed = speed * ticker.deltaTime;
     newSprite = currentSprite;
     newSprite.zIndex = 7
     let nextX = currentSprite.x;
     let nextY = currentSprite.y;
     let collisionChecker: boolean = false
-
+    
     const playerCollision = currentSprite.getBounds()
     for(const entityKey of Object.keys(entities)){
       const entity = entities[entityKey]
@@ -329,36 +331,36 @@ const initGame = async () => {
     }
 
 
-    if (keys['ArrowUp'] && canMove(nextX, nextY - speed, currentSprite, collisionMap, tileSize)) {
-      nextY -= speed
+    if (keys['ArrowUp'] && canMove(nextX, nextY - newSpeed, currentSprite, collisionMap, tileSize)) {
+      nextY -= newSpeed
       newSprite = walkUp
       lastDirection = "up"
-      currentSprite.y -= speed
+      currentSprite.y -= newSpeed
       currentSprite.play()
 
     }
 
-    if (keys['ArrowDown'] && canMove(nextX, nextY + speed, currentSprite, collisionMap, tileSize)) {
-      nextY += speed
+    if (keys['ArrowDown'] && canMove(nextX, nextY + newSpeed, currentSprite, collisionMap, tileSize)) {
+      nextY += newSpeed
       newSprite = walkDown
       lastDirection = "down"
-      currentSprite.y += speed
+      currentSprite.y += newSpeed
       currentSprite.play()
     }
 
-    if (keys['ArrowLeft'] && canMove(nextX - speed, nextY, currentSprite, collisionMap, tileSize)) {
-      nextX -= speed
+    if (keys['ArrowLeft'] && canMove(nextX - newSpeed, nextY, currentSprite, collisionMap, tileSize)) {
+      nextX -= newSpeed
       newSprite = walkLeft
       lastDirection = "left"
-      currentSprite.x -= speed
+      currentSprite.x -= newSpeed
       currentSprite.play()
     }
 
-    if (keys['ArrowRight'] && canMove(nextX + speed, nextY, currentSprite, collisionMap, tileSize)) {
-      nextX += speed
+    if (keys['ArrowRight'] && canMove(nextX + newSpeed, nextY, currentSprite, collisionMap, tileSize)) {
+      nextX += newSpeed
       newSprite = walkRight
       lastDirection = "right"
-      currentSprite.x += speed
+      currentSprite.x += newSpeed
       currentSprite.play()
     }
 
