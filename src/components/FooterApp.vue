@@ -2,6 +2,7 @@
   <v-footer
     height="40"
     app
+    class="footer"
   >
     <a
       v-for="item in items"
@@ -50,4 +51,7 @@
 
     &:hover
       color: rgba(25, 118, 210, 1)
+
+  .footer
+    background-color: #BDBDBD
 </style>

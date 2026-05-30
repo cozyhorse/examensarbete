@@ -111,11 +111,11 @@ let lastDirection: string = "down";
 const showQuestLog = ref(false);
 
 const entityHitData =  ref<Record<string, boolean | null>>({
-  scandic: false,
-  ichaicha: false,
-  skovdekommun: false,
-  majoren: false,
-  elgiganten: false,
+  Scandic: false,
+  IchaIcha: false,
+  Skovdekommun: false,
+  Majoren: false,
+  Elgiganten: false,
 })
 
 onMounted(async () => {
@@ -242,20 +242,20 @@ const initGame = async () => {
 
   }
 
-  const scandic = entitySetter(data, "scandic", world)
-  const ichaicha = entitySetter(data, "ichaicha", world)
-  const skovdekommun = entitySetter(data, "skovdekommun", world)
-  const majoren = entitySetter(data, "majoren", world)
-  const elgiganten = entitySetter(data, "elgiganten", world)
+  const Scandic = entitySetter(data, "Scandic", world)
+  const IchaIcha = entitySetter(data, "IchaIcha", world)
+  const Skovdekommun = entitySetter(data, "Skovdekommun", world)
+  const Majoren = entitySetter(data, "Majoren", world)
+  const Elgiganten = entitySetter(data, "Elgiganten", world)
   const construction = entitySetter(data, "construction", world)
   const construction2 = entitySetter(data, "construction2", world)
 
   const entities: Record<string, PIXI.Sprite | null> = {
-    scandic,
-    ichaicha,
-    skovdekommun,
-    majoren,
-    elgiganten,
+    Scandic,
+    IchaIcha,
+    Skovdekommun,
+    Majoren,
+    Elgiganten,
     construction,
     construction2,
   }
@@ -294,7 +294,7 @@ const initGame = async () => {
     let nextX = currentSprite.x;
     let nextY = currentSprite.y;
     let collisionChecker: boolean = false
-    
+
     const playerCollision = currentSprite.getBounds()
     for(const entityKey of Object.keys(entities)){
       const entity = entities[entityKey]

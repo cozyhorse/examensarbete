@@ -15,5 +15,6 @@
   background-image: url("/src/assets/headerassets/CVTOWN.gif");
   background-position: center;
   background-size: contain;
+  background-color: #BDBDBD;
 }
 </style>
